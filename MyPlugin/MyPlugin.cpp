@@ -29,8 +29,6 @@ public:
   bool HandleTopLevelDecl(DeclGroupRef DG) override {
     for (DeclGroupRef::iterator i = DG.begin(), e = DG.end(); i != e; ++i) {
       const Decl *D = *i;
-      if (const NamedDecl *ND = dyn_cast<NamedDecl>(D))
-        llvm::errs() << "top-level-decl: \"" << ND->getNameAsString() << "\"\n";
 
       // check if this is a function declaration
       if (const FunctionDecl *FD = dyn_cast<FunctionDecl>(D)) {

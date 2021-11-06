@@ -2,8 +2,11 @@
 Demonstrating a plugin for clang on MacOS
 
 The plugin traverses the AST for a source file to find all function
-arguments. It then checks if the length of the argument names are
-less than a certain minimum value and prints a warning.
+arguments/parameters. Then compliance with a 'code standard' is checked:
+
+* Parameters must be at least 5 characters long
+* Parameters must start with Uppercase
+* Parameters must not be in list of 'forbidden words' (crap, gylle)
 
 ## Building clang
     > git clone [--depth=1] https://github.com/llvm/llvm-project.git
