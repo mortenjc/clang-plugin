@@ -18,7 +18,7 @@ Now go do something else for a while as the build takes a long time.
 
     > clang -fsyntax-only -Xclang -ast-dump test.cpp
 
-    ![images/ast.png]
+![Output of ast-dump](images/ast.png)
 
 ## Write the plugin code
 In this case see MyPlugin/MyPlugin.cpp
@@ -33,3 +33,5 @@ In this case see MyPlugin/MyPlugin.cpp
 Use or modify the runplugin script
 
     > ./runplugin test.cpp
+
+![Output of ast-dump](images/result.png)
