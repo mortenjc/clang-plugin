@@ -1,0 +1,6 @@
+export BD=~/projects/clang/llvm-project/build
+
+$BD//bin/clang++ -I$BD/tools/clang/include -Itools/clang/include -I$BD/include -Iinclude \
+          $1 -fsyntax-only \
+          -Xclang -load -Xclang $BD/lib/MyPlugin.dylib -Xclang \
+          -plugin -Xclang my-plugin
