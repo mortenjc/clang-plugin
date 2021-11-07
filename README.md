@@ -24,7 +24,32 @@ Now go do something else for a while as the build takes a long time.
 ![Output of ast-dump](images/ast.png?)
 
 ## Write the plugin code
-In this case see MyPlugin/MyPlugin.cpp
+From the AST dump we see that clang uses the type FunctionDecl for - well -
+function declarations.
+
+We use this in the AST traversal by casting the more general DeclGroupRef, which  
+is passed to HandleToplevelDecl(), to FunctionDecl. If that is not a nullptr
+we can then do whatever is appropriate for FunctionDecl.
+
+    if (const FunctionDecl *FD = dyn_cast<FunctionDecl>(D)) {
+      // do function specific processing here
+    }
+See [clang documentation](https://clang.llvm.org/doxygen/classclang_1_1FunctionDecl.html)
+for the available methods.
+
+For example we use the method *parameters()* which returns an iterable object
+to investigate the function parameters.
+
+    auto parms = FD->parameters();
+
+    // check for code standard compliance
+    for (auto & PD : parms) {
+      auto name = PD->getNameAsString();
+      // process parameter name
+    }
+
+
+There is a small bit of boilerplate code that needs to be written but not much. See [MyPlugin.cpp](MyPlugin/MyPlugin.cpp)
 
 ## Add the plugin
     > cp -r MyPlugin llvm-project/clang/examples
